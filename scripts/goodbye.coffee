@@ -8,8 +8,6 @@
 #   Testing 1,2,3
 
 module.exports = (robot) ->
-  robot.hear /(cya|bye|later)/i, (msg) ->
+  robot.respond /(cya|bye|later)/i, (msg) ->
     goodbyes = [ "Bye", "Later", "Take care", "Goodbye", "Thanks for all the fish"]
-    msg.send msg.random goodbyes
-    process.exit 0
-
+    msg.send "#{msg.random goodbyes} :wave:"

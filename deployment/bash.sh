@@ -34,6 +34,7 @@ env HUBOT_CAMPFIRE_TOKEN=''
 env HUBOT_IRC_SERVER=''
 env HUBOT_IRC_ROOMS=''
 env HUBOT_IRC_NICK=''
+env HUBOT_IRC_UNFLOOD='true'
 
 # Subscribe to these upstart events
 # This will make Hubot start on system boot
