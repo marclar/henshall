@@ -1,0 +1,14 @@
+/var/log/hubot.log {
+  daily
+  missingok
+  rotate 14
+  size 50M
+  compress
+  delaycompress
+  notifempty
+  create 640 hubot hubot
+  sharedscripts
+  postrotate
+    restart hubot
+  endscript
+}
