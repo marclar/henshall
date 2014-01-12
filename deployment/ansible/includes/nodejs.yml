@@ -1,0 +1,20 @@
+#
+# node.js instal (latest stable instead of Ubuntu's out-of-date one)
+#
+- name: Node.js | Package prerequisites for node.js
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-software-properties
+    - software-properties-common
+
+- name: Node.js | Add the node.js PPA to sources
+  command: add-apt-repository -y ppa:chris-lea/node.js
+           creates=/etc/apt/sources.list.d/chris-lea-node_js-quantal.list
+  register: added_node_ppa
+
+- name: Node.js | Update the apt cache for the new repository
+  apt: update-cache=yes
+  when: added_node_ppa.changed
+
+- name: Node.js | Install nodejs (includes npm)
+  apt: pkg=nodejs state=installed

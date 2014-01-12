@@ -1,0 +1,71 @@
+---
+- hosts: hubot
+  vars:
+    node_version: "0.10.24"
+    node_prefix: "node-v{{ node_version }}"
+    hubot_name: "henshall"
+    hubot_repo: "git://github.com/matthutchinson/henshall.git"
+    hubot_adapter: "irc"
+    campfire_account: ""
+    campfire_rooms: ""
+    campfire_token: ""
+    irc_server: "irc.perl.org"
+    irc_rooms: "#henshall"
+
+  handlers:
+    - name: restart hubot
+      service: name=hubot state=restarted
+
+  tasks:
+
+  # update apt cache
+  - name: update apt cache
+    apt: update-cache=yes
+
+  # install prequiste packages
+  - name: install base dependencies
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - build-essential
+      - git-core
+      - redis-server
+
+  # check redis is running
+  - name: ensure redis-server is running
+    service: name=redis-server state=started
+
+  # install nodejs
+  - include: ./includes/nodejs.yml
+
+  # install coffee script
+  - name: install coffee-script globally
+    command: npm install -g coffee-script creates=/usr/bin/coffee
+
+  # clone hubot from git
+  - name: clone hubot repo
+    git: repo={{ hubot_repo }} dest=/usr/local/hubot
+
+  - name: install hubot dependencies
+    command: npm install chdir=/usr/local/hubot
+
+  # create hubot user
+  - name: ensure hubot user is present
+    user: name=hubot comment=hubot state=present
+
+  # create and own hubot logs
+  - name: create hubot log file
+    file: path=/var/log/hubot.log owner=hubot group=hubot mode=0644
+
+  # rotate hubot log files
+  - name: set hubot log file rotation
+    template: src=./templates/hubot_logrotate.j2 dest=/etc/logrotate.d/hubot mode=0644
+
+  # add upstart script
+  - name: create hubot upstart config
+    template: src=./templates/hubot_upstart.j2 dest=/etc/init/hubot.conf mode=0644
+    notify:
+      - restart hubot
+
+  # start the bot
+  - name: start hubot running
+    service: name=hubot state=started

@@ -1,19 +1,35 @@
+# Tested with Ubuntu 12.10 (ymmv with other distribs)
+
+# wget https://github.com/matthutchinson/henshall/blob/master/deployment/bash.sh
+# [edit file, setting adapter, bot name and other variables]
+# chmod 755 ./bash.sh && ./bash.sh
+# dependencies will install and bot starts running (logs to /var/log/hubot.log)
+
+# some vars
+HUBOT_ADAPTER="irc"
+HUBOT_NAME="henshall"
+HUBOT_REPO="https://github.com/matthutchinson/henshall.git"
+
+HUBOT_CAMPFIRE_ACCOUNT=''
+HUBOT_CAMPFIRE_ROOMS=''
+HUBOT_CAMPFIRE_TOKEN=''
+HUBOT_IRC_SERVER='irc.perl.org'
+HUBOT_IRC_ROOMS='#henshall'
+
 # install build essentials, redis (for the brain) and git
 apt-get update
-apt-get install build-essential vim git redis-server --assume-yes
+apt-get install build-essential git-core redis-server python-software-properties software-properties-common --assume-yes
 
-# install (latest) node (includes npm)
-mkdir /usr/local/src/node-latest
-cd /usr/local/src/node-latest
-curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1
-./configure && make && make install
-cd ~/
+# install (latest) node (builds from source (slow) and includes npm)
+add-apt-repository -y ppa:chris-lea/node.js
+apt-get update
+apt-get install nodejs --assume-yes
 
 # install coffee-script
 npm install -g coffee-script
 
 # clone hubot from git
-git clone https://github.com/matthutchinson/henshall.git /usr/local/hubot
+git clone $HUBOT_REPO /usr/local/hubot
 cd /usr/local/hubot
 npm install
 
@@ -28,12 +44,12 @@ cat <<EOF > /etc/init/hubot.conf
 description "Hubot"
 
 # campfire adapter variables
-env HUBOT_CAMPFIRE_ACCOUNT=''
-env HUBOT_CAMPFIRE_ROOMS=''
-env HUBOT_CAMPFIRE_TOKEN=''
-env HUBOT_IRC_SERVER=''
-env HUBOT_IRC_ROOMS=''
-env HUBOT_IRC_NICK=''
+env HUBOT_CAMPFIRE_ACCOUNT='$HUBOT_CAMPFIRE_ACCOUNT'
+env HUBOT_CAMPFIRE_ROOMS='$HUBOT_CAMPFIRE_ROOMS'
+env HUBOT_CAMPFIRE_TOKEN='$HUBOT_CAMPFIRE_TOKEN'
+env HUBOT_IRC_SERVER='$HUBOT_IRC_SERVER'
+env HUBOT_IRC_ROOMS='$HUBOT_IRC_ROOMS'
+env HUBOT_IRC_NICK='$HUBOT_NAME'
 env HUBOT_IRC_UNFLOOD='true'
 
 # Subscribe to these upstart events
@@ -45,9 +61,9 @@ stop on runlevel [!2345]
 env HUBOT_DIR='/usr/local/hubot'
 env HUBOT_LOG_FILE='/var/log/hubot.log'
 env HUBOT_BIN='bin/hubot'
-env HUBOT_ADAPTER='campfire'
 env HUBOT_USER='hubot'
-env HUBOT_NAME='henshall'
+env HUBOT_ADAPTER='$HUBOT_ADAPTER'
+env HUBOT_NAME='$HUBOT_NAME'
 
 # Keep the process alive, limit to 5 restarts in 60s
 respawn
