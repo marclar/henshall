@@ -1,8 +1,8 @@
 # Tested with Ubuntu 12.10 (ymmv with other distribs)
 
-# wget https://github.com/matthutchinson/henshall/blob/master/deployment/hubot.sh
+# wget https://raw.github.com/matthutchinson/henshall/master/deployment/hubot.sh
 # [edit file, setting adapter, bot name and other variables]
-# chmod 755 ./bash.sh && ./bash.sh
+# chmod 755 ./hubot.sh && ./hubot.sh
 # dependencies will install and bot starts running (logs to /var/log/hubot.log)
 
 # some vars
