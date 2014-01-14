@@ -1,10 +1,3 @@
-# Tested with Ubuntu 12.10 (ymmv with other distribs)
-
-# wget https://raw.github.com/matthutchinson/henshall/master/deployment/hubot.sh
-# [edit file, setting adapter, bot name and other variables]
-# chmod 755 ./hubot.sh && ./hubot.sh
-# dependencies will install and bot starts running (logs to /var/log/hubot.log)
-
 # some vars
 HUBOT_ADAPTER="irc"
 HUBOT_NAME="henshall"
