@@ -5,8 +5,10 @@
 
 * On master (or locally) edit `/etc/ansible/hosts` and add the hubot hostname/ip e.g.
 
-    [hubot]
-    129.21.11.111
+```
+[hubot]
+129.21.11.111
+```
 
 * Ensure your public key is available on the hubot machine for passwordless SSH access
   (from local or master ansible server). Otherwise use --ask-pass flag with the
