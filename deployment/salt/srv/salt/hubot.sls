@@ -27,6 +27,8 @@ coffee-script:
     - run
     - name: npm install coffee
     - unless: npm list | grep coffee
+    - require:
+      - pkg: nodejs
 
 hubot-git-repo:
   git.latest:
@@ -38,15 +40,14 @@ hubot-dependencies:
     - run
     - cwd: /usr/local/hubot
     - name: npm install
+    - unless:  test -d /usr/local/hubot/node_modules
+    - require:
+      - pkg: nodejs
 
 hubot-user:
   user:
     - present
     - name: hubot
-    - groups:
-      - hubot
-  group:
-    - present
 
 /var/log/hubot.log:
   file:
@@ -54,6 +55,8 @@ hubot-user:
     - user: hubot
     - group: hubot
     - mode: 644
+    - require:
+      - user: hubot-user
 
 /etc/logrotate.d/hubot:
   file:
@@ -69,3 +72,11 @@ hubot-user:
 hubot:
   service:
     - running
+    - require:
+      - pkg: nodejs
+      - pkg: redis-server
+      - user: hubot-user
+      - cmd: coffee-script
+      - cmd: hubot-dependencies
+    - watch:
+      - file: /etc/init/hubot.conf
