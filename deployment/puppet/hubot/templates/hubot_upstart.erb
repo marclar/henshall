@@ -28,5 +28,5 @@ env HUBOT_NAME='<%= @options['hubot_name'] %>'
 respawn
 respawn limit 5 60
 
-exec start-stop-daemon --start --chuid \$HUBOT_USER --chdir \$HUBOT_DIR \
-  --exec \$HUBOT_DIR/\$HUBOT_BIN -- --name \$HUBOT_NAME --adapter \$HUBOT_ADAPTER >> \$HUBOT_LOG_FILE 2>&1
+exec start-stop-daemon --start --chuid $HUBOT_USER --chdir $HUBOT_DIR \
+   --exec $HUBOT_DIR/$HUBOT_BIN -- --name $HUBOT_NAME --adapter $HUBOT_ADAPTER >> $HUBOT_LOG_FILE 2>&1

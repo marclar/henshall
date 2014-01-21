@@ -1,8 +1,21 @@
 class hubot {
 
-  Exec { path => '/bin:/sbin:/usr/bin:/usr/sbin' }
+  include git
 
-  include nodejs
+  class { 'nodejs':
+    version => 'v0.10.24',
+    make_install => false,
+  }
+
+  file { '/usr/bin/node':
+    ensure => 'link',
+    target => '/usr/local/node/node-default/bin/node',
+  }
+
+  file { '/usr/bin/npm':
+    ensure => 'link',
+    target => '/usr/local/node/node-default/bin/npm',
+  }
 
   $options = {
     hubot_name       => 'henshall',
@@ -17,13 +30,12 @@ class hubot {
   package { 
     'build-essential':  
       ensure => 'installed';
-    'git-core':  
-      ensure => 'installed';
     'redis-server':
       ensure => 'installed';
     'coffee':
       ensure   => 'present',
-      provider => 'npm';
+      provider => npm,
+      require  => File['/usr/bin/npm'],
   }
 
   service { 'redis-server':
@@ -31,16 +43,20 @@ class hubot {
     require => Package['redis-server'],
   }
 
-  exec { 'hubot git repo':
-    command => 'git clone https://github.com/matthutchinson/henshall.git /usr/local/hubot',
-    creates => '/usr/local/hubot',
-  }
+  vcsrepo { '/usr/local/hubot':
+    provider => 'git',
+    source   => 'https://github.com/matthutchinson/henshall.git',
+    revision => 'master',
+    owner    => 'hubot',
+    group    => 'hubot',
+    require  => [ User['hubot'], Package['git'] ],
+  } 
 
   exec { 'hubot dependencies':
-    command => 'npm install',
+    command => '/usr/bin/npm install -g',
     cwd     => '/usr/local/hubot',
-    unless  => 'test -d /usr/local/hubot/node_modules',
-    require => Package['coffee'],
+    unless  => '/usr/bin/test -d /usr/local/hubot/node_modules',
+    require => [ File['/usr/bin/npm'], Package['coffee'] ],
   }
 
   user { 'hubot':
@@ -67,6 +83,7 @@ class hubot {
   }
 
   service { 'hubot':
+    enable    => 'true',
     ensure    => 'running',
     require   => [ Package['coffee'], File['/etc/init/hubot.conf'] ],
     subscribe => File['/etc/init/hubot.conf'],
