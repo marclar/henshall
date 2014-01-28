@@ -1,61 +1,77 @@
 ### Deploying with Chef
 
-### Notes
+#### Read me first
 
-* The master server requires 1GB RAM - anything lower and the install will fail :(
+* The master server requires 1GB RAM, any lower and the install will fail :(
+* For the purposes of this guide, the workstation was my local OSX laptop.
 * Chef master, workstation and children must all be able to access each other
-  from real resolvable host names
-* This [quick overview](http://docs.opscode.com/chef_quick_overview.html) is useful for a quick
-  overview of Chef
+  from real resolvable host names.
 
-### Getting Started
+#### Getting Started
 
-* Install chef master server, get the package to install [from here](http://www.getchef.com/chef/install/)
+* First, install the Chef master server. Find out which package to install [from
+  here](http://www.getchef.com/chef/install/). For Ubuntu Linux I used:
 
-    wget
-    https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb
-    dpkg -i  chef-server_11.0.10-1.ubuntu.12.04_amd64.deb
-    chef-server-ctl reconfigure
+```
+wget
+https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb
+dpkg -i  chef-server_11.0.10-1.ubuntu.12.04_amd64.deb chef-server-ctl
+reconfigure
+```
 
-* Set up a chef workstation (could be your local machine), again you can get
-  instructions [from here](http://www.getchef.com/chef/install/), For OSX I used;
+* Set up a Chef workstation (was my local machine), again you can get
+  instructions [from here](http://www.getchef.com/chef/install/). For OSX I
+  used:
 
-    # install the workstation client
-    curl -L https://www.opscode.com/chef/install.sh | sudo bash
-    # clone the base chef repo somewhere
-    git clone git://github.com/opscode/chef-repo.git ~/chef-hubot
+```
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
+# clone the base chef repo somewhere
+git clone git://github.com/opscode/chef-repo.git ~/chef-hubot
+```
 
-* On the workstation, setup configuration/permissions from chef master server
+* On your workstation, setup cert/permission from the Chef master server:
 
-    cd ~/chef-hubot
-    mkdir -p .chef
-    scp root@chef-master:/etc/chef-server/admin.pem  ./.chef/
-    scp root@chef-master:/etc/chef-server/chef-validator.pem  ./.chef/
-    knife configure --initial
-    # follow the questions, choosing defaults, configure paths for pem files
-    # test the user was created OK with
-    knife user list
+```
+cd ~/chef-hubot
+mkdir -p .chef
+scp root@chef-master:/etc/chef-server/admin.pem  ./.chef/
+scp root@chef-master:/etc/chef-server/chef-validator.pem  ./.chef/
+knife configure --initial
 
-* After this a new admin user will be created on the master server you can login at https://chef-master:443
+# follow the questions, choosing defaults, configuring paths for these pem files
+# test the user was created OK with this knife command
 
-* From the workstation, install chef on the hubot child node with this simple one liner
+knife user list
+```
 
-    knife bootstrap hubot-hostname -x root
+* This creates a new admin user on the master server you can login at
+  https://chef-master:443
 
-* Copy the hubot cookbook from this repo to ./.chef/cookbooks
+* From the workstation, install Chef on the hubot child node with this simple
+  one liner (the hubot child node is a blank slate prior to this):
+
+    `knife bootstrap hubot-hostname -x root`
+
+* On your workstation copy the hubot cookbook from `./deployment/chef/hubot` to
+  `./.chef/cookbooks/hubot`
 
 * Upload the cookbook and supporting files to the master server
 
-    knife cookbook upload -a
+    `knife cookbook upload -a`
 
 * Add the cookbook to the hubot server run list
 
-    knife node run_list add hubot-hostname 'hubot'
+    `knife node run_list add hubot-hostname 'hubot'`
 
-* Wait 30 mins or so for the run list to be applied to the hubot server from the
-  master, OR force it to run right now, by ssh-ing to the hubot client server
-  and running
+* Now you can wait 30 mins (or so) for the run list to be applied to the hubot
+  server, _OR_ force it to run right now, by running this on the hubot child:
 
-    chef-client
+    `chef-client`
 
-* Take a break and have a cup of tea
+* Chef should install, configure and start hubot.
+
+* After all that, take a break and have a cup of tea!
+
+#### Helpful links
+
+* Chef [Quick Overview](http://docs.opscode.com/chef_quick_overview.html)
