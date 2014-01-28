@@ -3,28 +3,26 @@
 Ansible can be installed on your local machine or a remote Ansible master
 node.
 
-* Install Ansible by following [these
-  instructions](http://docs.ansible.com/intro_installation.html).
+Install Ansible by following [these
+instructions](http://docs.ansible.com/intro_installation.html).
 
-* Edit `/etc/ansible/hosts` and add the hubot host and ip address like so:
+Edit `/etc/ansible/hosts` and add the hubot host and ip address like so:
 
-```
-[hubot-hostname]
-129.21.11.111
-```
+    [hubot-hostname]
+    129.21.11.111
 
-* This ensures the master node knows about the hubot child node. Copy the
-  deployment/ansible directory from this repo to the master node.
+This ensures the master node knows about the hubot child node. Copy the
+deployment/ansible directory from this repo to the master node.
 
-* Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
+Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
 
-* Next ensure your SSH key is configured on the hubot child node for
-	passwordless SSH access from the master node. Otherwise use --ask-pass flag
-	with the playbook command below.
+Next ensure your SSH key is configured on the hubot child node for passwordless
+SSH access from the master node. Otherwise use --ask-pass flag with the playbook
+command below.
 
-* Run the playbook command (locally or from the ansible master) with:
+Run the playbook command (locally or from the ansible master) with:
 
-    `ansible-playbook ./deployment/ansible/hubot.yml`
+    ansible-playbook ./deployment/ansible/hubot.yml
 
 #### Helpful links
 
