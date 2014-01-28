@@ -11,8 +11,11 @@ Edit `/etc/ansible/hosts` and add the hubot host and ip address like so:
     [hubot-hostname]
     129.21.11.111
 
-This ensures the master node knows about the hubot child node. Copy the
-deployment/ansible directory from this repo to the master node.
+This ensures the master node knows about the hubot child node.
+
+Next, copy the deployment/ansible directory from this repo to the master node.
+
+    scp -r ./deployment/ansible/* ansible-master:~/
 
 Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
 
@@ -22,7 +25,7 @@ command below.
 
 Run the playbook command (locally or from the ansible master) with:
 
-    ansible-playbook ./deployment/ansible/hubot.yml
+    ansible-playbook ~/hubot.yml
 
 #### Helpful links
 
