@@ -22,12 +22,12 @@ dep 'add-apt-repository.bin' do
 end
 
 dep 'chris-lea apt source' do
-  requires 'apt', 'add-apt-repository.bin'
+  requires 'add-apt-repository.bin'
   met? {
     shell 'apt-cache policy | grep chris-lea\/node\.js'
   }
   meet {
-    shell 'apt-get update && add-apt-repository -y ppa:chris-lea/node.js'
+    shell 'add-apt-repository -y ppa:chris-lea/node.js && apt-get update'
   }
 end
 

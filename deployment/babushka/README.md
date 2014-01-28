@@ -9,15 +9,10 @@ Docs and more info on Babushka are available [here](http://babushka.me)
     # auto-install with no questions asked use;
     sh -c "`curl https://babushka.me/up`" </dev/null
 
-* Make an empty dep dir on hubot
+* Copy the deps from this repo to ~/.babushka/deps on the hubot server
 
-    mkdir ~/.babushka/deps
+    scp -r ./deployment/babushka/deps hubot-server:~/.babushka/deps
 
-* Copy the hubot.rb and hubot/ folder from this repo to ~/.babushka/deps on the
-  hubot server
-
-    scp -r ./deployment/babushka/hubot* hubot-server:~/.babushka/deps/
-
-* Run babushka with hubot dep on the hubot server
+* Setup and launch hubot with babushka (on the hubot server) with;
 
     babushka hubot
