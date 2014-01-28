@@ -2,7 +2,7 @@
 
 #### Read me first
 
-* The master server requires 1GB RAM, any lower and the install will fail :(
+* The master server requires 1GB of RAM, any lower and the install will fail :(
 * For the purposes of this guide, the workstation was my local OSX laptop.
 * Chef master, workstation and children must all be able to access each other
   from real resolvable host names.
