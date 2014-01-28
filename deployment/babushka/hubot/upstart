@@ -1,0 +1,32 @@
+description "Hubot"
+
+# campfire adapter variables
+env HUBOT_CAMPFIRE_ACCOUNT='<%= hubot_options['campfire_account'] %>'
+env HUBOT_CAMPFIRE_ROOMS='<%= hubot_options['campfire_rooms'] %>'
+env HUBOT_CAMPFIRE_TOKEN='<%= hubot_options['campfire_token'] %>'
+env HUBOT_IRC_SERVER='<%= hubot_options['irc_server'] %>'
+env HUBOT_IRC_ROOMS='<%= hubot_options['irc_rooms'] %>'
+env HUBOT_IRC_NICK='<%= hubot_options['hubot_name'] %>'
+
+env HUBOT_IRC_UNFLOOD='true'
+
+# Subscribe to these upstart events
+# This will make Hubot start on system boot
+start on filesystem or runlevel [2345]
+stop on runlevel [!2345]
+
+# Path to Hubot installation
+env HUBOT_DIR='/usr/local/hubot'
+env HUBOT_LOG_FILE='/var/log/hubot.log'
+env HUBOT_BIN='bin/hubot'
+env HUBOT_USER='hubot'
+
+env HUBOT_ADAPTER='<%= hubot_options['hubot_adapter'] %>'
+env HUBOT_NAME='<%= hubot_options['hubot_name'] %>'
+
+# Keep the process alive, limit to 5 restarts in 60s
+respawn
+respawn limit 5 60
+
+exec start-stop-daemon --start --chuid $HUBOT_USER --chdir $HUBOT_DIR \
+   --exec $HUBOT_DIR/$HUBOT_BIN -- --name $HUBOT_NAME --adapter $HUBOT_ADAPTER >> $HUBOT_LOG_FILE 2>&1
