@@ -17,7 +17,7 @@ Next, copy the deployment/ansible directory from this repo to the master node.
 
     scp -r ./deployment/ansible/* ansible-master:~/
 
-Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
+Edit the hubot configuration vars in `~/hubot.yml`
 
 Next ensure your SSH key is configured on the hubot child node for passwordless
 SSH access from the master node. Otherwise use --ask-pass flag with the playbook
