@@ -23,7 +23,7 @@ server.
 
     `ansible-playbook ./deployment/ansible/hubot.yml`
 
-### Helpful Links
+#### Links
 
 * [Installing Ansible](http://docs.ansible.com/intro_installation.html)
 * [Ansible Docs](http://docs.ansible.com)
