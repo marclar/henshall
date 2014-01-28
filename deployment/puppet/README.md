@@ -2,18 +2,19 @@
 
 #### Puppet Child
 
-Install puppet on the master and hubot servers with;
+* Install puppet on the master and hubot servers with;
 
     wget http://apt.puppetlabs.com/puppetlabs-release-quantal.deb
     dpkg -i puppetlabs-release-quantal.deb
     apt-get update
     apt-get install puppet -y
 
-Set puppet to auto-start on hubot server with;
+* Set puppet to auto-start on hubot server with;
 
     sed --in-place 's/START=no/START=yes/' /etc/default/puppet
 
-Configure puppet on hubot server in `/etc/puppet/puppet.conf` under the [main] section add;
+* Configure puppet on hubot server in `/etc/puppet/puppet.conf` under the [main]
+  section add;
 
     server = puppet-master-hostname
     report = true
@@ -23,7 +24,7 @@ Configure puppet on hubot server in `/etc/puppet/puppet.conf` under the [main] s
 
 **Note** you _must_ use a host name here (not an IP address)
 
-Start puppet on the hubot server;
+* Start puppet on the hubot server;
 
     puppet resource service puppet ensure=running enable=true
 
