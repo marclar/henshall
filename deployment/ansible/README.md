@@ -1,9 +1,8 @@
-### Deploying with Ansible
+### Deploying with [Ansible](http://www.ansible.com/)
 
-* Install [ansible](http://docs.ansible.com/index.html), locally or on an ansible
-  master server
+* Install Ansible, locally or on an Ansible master server following [these instructions](http://docs.ansible.com/intro_installation.html)
 
-* On master (or locally) edit `/etc/ansible/hosts` and add the hubot hostname/ip e.g.
+* On master (or locally) edit `/etc/ansible/hosts` and add the hubot hostname and ip address like so;
 
 ```
 [hubot]
@@ -11,10 +10,10 @@
 ```
 
 * Ensure your public key is available on the hubot machine for passwordless SSH access
-  (from local or master ansible server). Otherwise use --ask-pass flag with the
+  (from the local or master ansible server). Otherwise use --ask-pass flag with the
   playbook command below.
 
-* Edit bot configuration in `hubot.yml`, then run the following (locally or from
-  the ansible master)
+* Edit the hubot configuration in `deployment/ansible/hubot.yml`, then run the playbook command (locally or from
+  the ansible master);
 
     `ansible-playbook hubot.yml`
