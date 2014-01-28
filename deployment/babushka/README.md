@@ -1,15 +1,14 @@
 ### Deploying with [Babushka](http://babushka.me)
 
-* On the hubot server itself install the latest (stable) Babushka with:
+* On the hubot server itself, install the latest (stable) Babushka with:
 
 ```
 sh -c "`curl https://babushka.me/up`"
-# answer the prompts, or if you prefer to
-# auto-install with no questions asked use;
+# OR auto-install with no questions asked via
 sh -c "`curl https://babushka.me/up`" </dev/null
 ```
 
-* Copy the hubot deps to ~/.babushka/deps on the hubot server:
+* Copy the hubot deps to ~/.babushka/deps on the remote hubot server:
 
     `scp -r ./deployment/babushka/deps hubot-hostname:~/.babushka/deps`
 
@@ -18,7 +17,9 @@ sh -c "`curl https://babushka.me/up`" </dev/null
     `babushka hubot`
 
 * This installs all the dependencies required for hubot to run, and starts the
-  hubot service.
+  hubot service.  Logs from this command are available at:
+
+    `~/.babushka/logs/hubot`
 
 #### Helpful links
 
