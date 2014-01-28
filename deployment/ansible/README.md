@@ -13,7 +13,8 @@ node.
 129.21.11.111
 ```
 
-* This ensures the master node knows about the hubot child node.
+* This ensures the master node knows about the hubot child node. Copy the
+  deployment/ansible directory from this repo to the master node.
 
 * Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
 
