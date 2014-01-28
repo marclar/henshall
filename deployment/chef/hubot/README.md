@@ -1,17 +1,6 @@
 hubot Cookbook
 ==============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
-
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - hubot needs toaster to brown your bagel.
+Installs and configures Hubot and its dependencies
 
 Attributes
 ----------
@@ -27,19 +16,51 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['hubot']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['hubot']['campfire_account']</tt></td>
+    <td>String</td>
+    <td>hubot campfire account</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['campfire_rooms']</tt></td>
+    <td>String</td>
+    <td>hubot campfire rooms</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['campfire_token']</tt></td>
+    <td>String</td>
+    <td>hubot campfire token</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['irc_server']</tt></td>
+    <td>String</td>
+    <td>hubot irc server</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['irc_rooms']</tt></td>
+    <td>String</td>
+    <td>hubot irc rooms</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['bot_name']</tt></td>
+    <td>String</td>
+    <td>hubot bot name</td>
+    <td><tt></tt></td>
+  </tr>
+  <tr>
+    <td><tt>['hubot']['bot_adapter']</tt></td>
+    <td>String</td>
+    <td>hubot bot apdapter</td>
+    <td><tt></tt></td>
   </tr>
 </table>
 
 Usage
 -----
-#### hubot::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `hubot` in your node's `run_list`:
 
 ```json
@@ -51,18 +72,6 @@ Just include `hubot` in your node's `run_list`:
 }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Matthew Hutchinson
