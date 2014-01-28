@@ -25,4 +25,4 @@ sh -c "`curl https://babushka.me/up`" </dev/null
 
 * [Installing Babushka](http://babushka.me/installing)
 * [Babushka RDoc](http://rubydoc.info/github/benhoskings/babushka/master/frames)
-* [Ben Hoskings Deps](https://github.com/benhoskings/babushka-deps)
+* [Ben Hoskings Deps Library](https://github.com/benhoskings/babushka-deps)

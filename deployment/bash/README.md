@@ -1,9 +1,13 @@
-### Deploying with Bash
+### Deploying with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell))
 
-* Edit hubot.sh, set variables to configure the bot, then on bot machine run;
+* Edit `./deployment/bash/hubot.sh` and set variables to configure the bot
 
-    `wget -O - https://raw.github.com/matthutchinson/henshall/master/deployment/bash/hubot.sh | sh`
+* Copy the bash script to the remote server and run it:
 
-* Dependencies will install and bot starts running (logging to /var/log/hubot.log)
+```
+scp ./deployment/bash/hubot.sh hubot-hostname:~/
+# then on remote server run
+chmod 755 ~/hubot.sh && ~/hubot.sh
+```
 
-*Note*: this bash script has been tested with Ubuntu 12.10 (YMMV with other dists)
+* The dependencies will install and the hubot service should start running
