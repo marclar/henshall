@@ -9,67 +9,60 @@
 
 #### Getting Started
 
-* First, install the Chef master server. Find out which package to install [from
+First, install the Chef master server. Find out which package to install [from
   here](http://www.getchef.com/chef/install/). For Ubuntu Linux I used:
 
-```
-wget
-https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb
-dpkg -i  chef-server_11.0.10-1.ubuntu.12.04_amd64.deb chef-server-ctl
-reconfigure
-```
+    wget
+    https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chef-server_11.0.10-1.ubuntu.12.04_amd64.deb
+    dpkg -i  chef-server_11.0.10-1.ubuntu.12.04_amd64.deb chef-server-ctl
+    reconfigure
 
-* Set up a Chef workstation again you can get instructions [from
-  here](http://www.getchef.com/chef/install/). For OSX I used:
+Set up a Chef workstation again you can get instructions [from
+here](http://www.getchef.com/chef/install/). For OSX I used:
 
-```
-curl -L https://www.opscode.com/chef/install.sh | sudo bash
-# clone the base chef repo somewhere
-git clone git://github.com/opscode/chef-repo.git ~/chef-hubot
-```
+    curl -L https://www.opscode.com/chef/install.sh | sudo bash
+    # clone the base chef repo somewhere
+    git clone git://github.com/opscode/chef-repo.git ~/chef-hubot
 
-* On your workstation, setup certs and permissions from the Chef master server:
+On your workstation, setup certs and permissions from the Chef master server:
 
-```
-mkdir -p ~/chef-hubot/.chef
-scp root@chef-master:/etc/chef-server/admin.pem  ~/chef-hubot/.chef/
-scp root@chef-master:/etc/chef-server/chef-validator.pem  ~/chef-hubot/.chef/
-knife configure --initial
-# follow the questions, choosing defaults, configuring paths for these pem files
-# test the user was created OK with this knife command
-knife user list
-```
+    mkdir -p ~/chef-hubot/.chef
+    scp root@chef-master:/etc/chef-server/admin.pem  ~/chef-hubot/.chef/
+    scp root@chef-master:/etc/chef-server/chef-validator.pem  ~/chef-hubot/.chef/
+    knife configure --initial
+    # follow the questions, choosing defaults, configuring paths for these pem files
+    # test the user was created OK with this knife command
+    knife user list
 
-* This creates a new admin user on the master server you can login to the Chef
-  admin interface at https://chef-master:443
+This creates a new admin user on the master server you can login to the Chef
+admin interface at https://chef-master:443
 
-* From the workstation, install Chef on the hubot child node with this simple
-  one liner (the hubot child node is a blank slate at this stage):
+From the workstation, install Chef on the hubot child node with this simple one
+liner (the hubot child node is a blank slate at this stage):
 
-    `knife bootstrap hubot-hostname -x root`
+    knife bootstrap hubot-hostname -x root
 
-* On your workstation copy the hubot cookbook from `./deployment/chef/hubot` to
-  `~/chef-hubot/.chef/cookbooks/hubot`
+On your workstation copy the hubot cookbook from `./deployment/chef/hubot` to
+`~/chef-hubot/.chef/cookbooks/hubot`
 
-* Edit `~/chef-hubot/.chef/cookbooks/hubot/attributes/default.rb` and set hubot
-  options.
+Edit `~/chef-hubot/.chef/cookbooks/hubot/attributes/default.rb` and set hubot
+options.
 
-* Upload the cookbook and supporting files to the master server
+Upload the cookbook and supporting files to the master server
 
-    `knife cookbook upload -a`
+    knife cookbook upload -a
 
-* Add the cookbook to the hubot server run list
+Add the cookbook to the hubot server run list
 
-    `knife node run_list add hubot-hostname 'hubot'`
+    knife node run_list add hubot-hostname 'hubot'
 
-* Now you can wait 30 mins (or so) for the run list to be applied to the hubot
-  server, _OR_ force it to run right now with this command on the hubot child:
+Now you can wait 30 mins (or so) for the run list to be applied to the hubot
+server, _OR_ force it to run right now with this command on the hubot child:
 
-    `chef-client`
+    chef-client
 
-* Chef should install, configure and start hubot.
-
-* After all that, take a break and have a cup of tea!
+Chef should install, configure and start hubot.  After all that, take a break
+and have a cup of tea!
 
 #### Helpful links
 
