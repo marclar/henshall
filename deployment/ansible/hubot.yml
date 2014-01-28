@@ -1,8 +1,6 @@
 ---
 - hosts: hubot
   vars:
-    node_version: "0.10.24"
-    node_prefix: "node-v{{ node_version }}"
     hubot_name: "henshall"
     hubot_repo: "git://github.com/matthutchinson/henshall.git"
     hubot_adapter: "irc"
@@ -34,7 +32,7 @@
   - name: ensure redis-server is running
     service: name=redis-server state=started
 
-  # install nodejs
+  # install nodejs (included)
   - include: ./includes/nodejs.yml
 
   # install coffee script
@@ -50,7 +48,7 @@
 
   # create hubot user
   - name: ensure hubot user is present
-    user: name=hubot comment=hubot state=present
+    user: name=hubot comment=hubot state=present shell=/bin/false
 
   # create and own hubot logs
   - name: create hubot log file
@@ -66,6 +64,6 @@
     notify:
       - restart hubot
 
-  # start the bot
+  # start the hubot service
   - name: start hubot running
     service: name=hubot state=started

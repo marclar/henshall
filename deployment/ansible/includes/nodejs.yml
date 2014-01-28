@@ -1,5 +1,4 @@
-#
-# node.js instal (latest stable instead of Ubuntu's out-of-date one)
+# node.js install (latest stable instead of Ubuntu's out-of-date one)
 #
 - name: Node.js | Package prerequisites for node.js
   apt: pkg={{ item }} state=installed

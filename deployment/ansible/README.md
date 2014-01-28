@@ -29,4 +29,4 @@ node.
 
 * [Installing Ansible](http://docs.ansible.com/intro_installation.html)
 * [Ansible Docs](http://docs.ansible.com)
-* [Ansible GitHub](https://github.com/ansible)
+* [Ansible Module Index](http://docs.ansible.com/modules_by_category.html)
