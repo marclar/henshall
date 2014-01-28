@@ -4,9 +4,7 @@ Installs and configures Hubot and its dependencies
 
 Attributes
 ----------
-TODO: List you cookbook attributes here.
 
-e.g.
 #### hubot::default
 <table>
   <tr>
@@ -19,43 +17,43 @@ e.g.
     <td><tt>['hubot']['campfire_account']</tt></td>
     <td>String</td>
     <td>hubot campfire account</td>
-    <td><tt></tt></td>
+    <td></td>
   </tr>
   <tr>
     <td><tt>['hubot']['campfire_rooms']</tt></td>
     <td>String</td>
     <td>hubot campfire rooms</td>
-    <td><tt></tt></td>
+    <td></td>
   </tr>
   <tr>
     <td><tt>['hubot']['campfire_token']</tt></td>
     <td>String</td>
     <td>hubot campfire token</td>
-    <td><tt></tt></td>
+    <td></td>
   </tr>
   <tr>
     <td><tt>['hubot']['irc_server']</tt></td>
     <td>String</td>
     <td>hubot irc server</td>
-    <td><tt></tt></td>
+    <td>irc.perl.org</td>
   </tr>
   <tr>
     <td><tt>['hubot']['irc_rooms']</tt></td>
     <td>String</td>
     <td>hubot irc rooms</td>
-    <td><tt></tt></td>
+    <td>#henshall</td>
   </tr>
   <tr>
     <td><tt>['hubot']['bot_name']</tt></td>
     <td>String</td>
     <td>hubot bot name</td>
-    <td><tt></tt></td>
+    <td>henshall</td>
   </tr>
   <tr>
     <td><tt>['hubot']['bot_adapter']</tt></td>
     <td>String</td>
     <td>hubot bot apdapter</td>
-    <td><tt></tt></td>
+    <td>irc</td>
   </tr>
 </table>
 
