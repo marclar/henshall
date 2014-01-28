@@ -9,7 +9,7 @@
   sh -c "`curl https://babushka.me/up`" </dev/null
 ```
 
-* Copy the hubot deps from this repo to ~/.babushka/deps on the hubot server
+* Copy the hubot deps from this repo to ~/.babushka/deps on the hubot server using;
 
     `scp -r ./deployment/babushka/deps hubot-hostname:~/.babushka/deps`
 
