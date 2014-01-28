@@ -55,6 +55,8 @@ knife user list
 * On your workstation copy the hubot cookbook from `./deployment/chef/hubot` to
   `./.chef/cookbooks/hubot`
 
+* Edit `./.chef/cookbooks/hubot/attributes/default.rb` and set hubot options.
+
 * Upload the cookbook and supporting files to the master server
 
     `knife cookbook upload -a`
