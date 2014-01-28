@@ -1,4 +1,4 @@
-### Deployment with Puppet
+### Deployment with [Puppet](http://puppetlabs.com)
 
 #### Puppet Child
 
@@ -81,3 +81,8 @@ On puppet child, kick off the agent (either daemonized or once off) e.g.;
     puppet agent
 
 This will install, configure and start hubot running on the child node.
+
+#### Helpful links
+
+* [Learn Puppet](https://puppetlabs.com/learn)
+* [Puppet Docs](http://docs.puppetlabs.com)
