@@ -15,7 +15,7 @@ node.
 
 * This ensures the master node knows about the hubot child node.
 
-* Edit the hubot configuration vars in `deployment/ansible/hubot.yml`
+* Edit the hubot configuration vars in `./deployment/ansible/hubot.yml`
 
 * Next ensure your SSH key is configured on the hubot child node for
 	passwordless SSH access from the master node. Otherwise use --ask-pass flag
