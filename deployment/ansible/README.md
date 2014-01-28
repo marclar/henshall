@@ -4,12 +4,12 @@ Ansible can be installed on your local machine or an remote Ansible master
 server.
 
 * Install Ansible by following [these
-  instructions](http://docs.ansible.com/intro_installation.html)
+  instructions](http://docs.ansible.com/intro_installation.html).
 
-* Edit `/etc/ansible/hosts` and add the hubot hostname and ip address like so;
+* Edit `/etc/ansible/hosts` and add the hubot hostname and ip address like so:
 
 ```
-[hubot]
+[hubot-hostname]
 129.21.11.111
 ```
 
@@ -17,8 +17,9 @@ server.
   access (from the local or master ansible server). Otherwise use --ask-pass
   flag with the playbook command below.
 
-* Edit the hubot configuration vars in `deployment/ansible/hubot.yml`, then run
-  the playbook command (locally or from the ansible master);
+* Edit the hubot configuration vars in `deployment/ansible/hubot.yml`
+
+* Run the playbook command (locally or from the ansible master) with:
 
     `ansible-playbook ./deployment/ansible/hubot.yml`
 
