@@ -1,11 +1,11 @@
 description "Hubot"
 
 # campfire adapter variables
-env HUBOT_CAMPFIRE_ACCOUNT='{{ pillar['campfire_account'] }}'
-env HUBOT_CAMPFIRE_ROOMS='{{ pillar['campfire_rooms'] }}'
-env HUBOT_CAMPFIRE_TOKEN='{{ pillar['campfire_token'] }}'
-env HUBOT_IRC_SERVER='{{ pillar['irc_server'] }}'
-env HUBOT_IRC_ROOMS='{{ pillar['irc_rooms'] }}'
+env HUBOT_CAMPFIRE_ACCOUNT='{{ pillar['hubot_campfire_account'] }}'
+env HUBOT_CAMPFIRE_ROOMS='{{ pillar['hubot_campfire_rooms'] }}'
+env HUBOT_CAMPFIRE_TOKEN='{{ pillar['hubot_campfire_token'] }}'
+env HUBOT_IRC_SERVER='{{ pillar['hubot_irc_server'] }}'
+env HUBOT_IRC_ROOMS='{{ pillar['hubot_irc_rooms'] }}'
 env HUBOT_IRC_NICK='{{ pillar['hubot_name'] }}'
 
 env HUBOT_IRC_UNFLOOD='true'

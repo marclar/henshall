@@ -74,6 +74,9 @@ server.
     scp -r ./deployment/puppet/hubot
     puppet-master-hostname:/etc/puppet/modules/hubot
 
+Edit `/hubot/manifests/init.pp` and set the configuration you would like for
+your bot.
+
 On puppet child, kick off the agent (either daemonized or once off) e.g.;
 
     puppet agent --test

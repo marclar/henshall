@@ -32,7 +32,7 @@ coffee-script:
 
 hubot-git-repo:
   git.latest:
-    - name: https://github.com/matthutchinson/henshall.git
+    - name: {% pillar['hubot_repo'] %}
     - target: /usr/local/hubot
 
 hubot-dependencies:
@@ -62,7 +62,7 @@ hubot-user:
   file:
     - managed
     - source: salt://templates/hubot_logrotate
-  
+
 /etc/init/hubot.conf:
   file:
     - managed

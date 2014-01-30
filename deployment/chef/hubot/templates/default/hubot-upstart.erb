@@ -6,7 +6,7 @@ env HUBOT_CAMPFIRE_ROOMS='<%= @hubot[:campfire_rooms] %>'
 env HUBOT_CAMPFIRE_TOKEN='<%= @hubot[:campfire_token] %>'
 env HUBOT_IRC_SERVER='<%= @hubot[:irc_server] %>'
 env HUBOT_IRC_ROOMS='<%= @hubot[:irc_rooms] %>'
-env HUBOT_IRC_NICK='<%= @hubot[:bot_name] %>'
+env HUBOT_IRC_NICK='<%= @hubot[:name] %>'
 env HUBOT_IRC_UNFLOOD='true'
 
 # Subscribe to these upstart events
@@ -19,8 +19,8 @@ env HUBOT_DIR='/usr/local/hubot'
 env HUBOT_LOG_FILE='/var/log/hubot.log'
 env HUBOT_BIN='bin/hubot'
 env HUBOT_USER='hubot'
-env HUBOT_ADAPTER='<%= @hubot[:bot_adapter] %>'
-env HUBOT_NAME='<%= @hubot[:bot_name] %>'
+env HUBOT_ADAPTER='<%= @hubot[:adapter] %>'
+env HUBOT_NAME='<%= @hubot[:name] %>'
 
 # Keep the process alive, limit to 5 restarts in 60s
 respawn

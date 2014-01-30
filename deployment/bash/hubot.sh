@@ -1,8 +1,7 @@
 # some vars
-HUBOT_ADAPTER="irc"
-HUBOT_NAME="henshall"
-HUBOT_REPO="https://github.com/matthutchinson/henshall.git"
-
+HUBOT_ADAPTER='irc'
+HUBOT_NAME='henshall'
+HUBOT_REPO='https://github.com/matthutchinson/henshall.git'
 HUBOT_CAMPFIRE_ACCOUNT=''
 HUBOT_CAMPFIRE_ROOMS=''
 HUBOT_CAMPFIRE_TOKEN=''

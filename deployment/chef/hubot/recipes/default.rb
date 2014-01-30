@@ -30,7 +30,7 @@ execute "install coffee script" do
 end
 
 execute "clone hubot repo" do
-  command "git clone https://github.com/matthutchinson/henshall.git /usr/local/hubot"
+  command "git clone #{@hubot[:repo]} /usr/local/hubot"
   creates "/usr/local/hubot"
 end
 

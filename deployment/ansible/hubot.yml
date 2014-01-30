@@ -4,11 +4,11 @@
     hubot_name: "henshall"
     hubot_repo: "git://github.com/matthutchinson/henshall.git"
     hubot_adapter: "irc"
-    campfire_account: ""
-    campfire_rooms: ""
-    campfire_token: ""
-    irc_server: "irc.perl.org"
-    irc_rooms: "#henshall"
+    hubot_campfire_account: ""
+    hubot_campfire_rooms: ""
+    hubot_campfire_token: ""
+    hubot_irc_server: "irc.perl.org"
+    hubot_irc_rooms: "#henshall"
 
   handlers:
     - name: restart hubot

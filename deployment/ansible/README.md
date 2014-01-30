@@ -13,7 +13,8 @@ Edit `/etc/ansible/hosts` and add the hubot host and ip address like so:
 
 This ensures the master node knows about the hubot child node.
 
-Next, copy the deployment/ansible directory from this repo to the master node.
+Next, copy the `./deployment/ansible` directory from this repo to the master
+node.
 
     scp -r ./deployment/ansible/* ansible-master:~/
 

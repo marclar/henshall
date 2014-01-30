@@ -18,17 +18,18 @@ class hubot {
   }
 
   $options = {
-    hubot_name       => 'henshall',
-    hubot_adapter    => 'irc',
-    campfire_account => '',
-    campfire_rooms   => '',
-    campfire_token   => '',
-    irc_server       => 'irc.perl.org',
-    irc_rooms        => '#henshall',
+    hubot_name             => 'henshall',
+    hubot_adapter          => 'irc',
+    hubot_repo             => 'https://github.com/matthutchinson/henshall.git',
+    hubot_campfire_account => '',
+    hubot_campfire_rooms   => '',
+    hubot_campfire_token   => '',
+    hubot_irc_server       => 'irc.perl.org',
+    hubot_irc_rooms        => '#henshall',
   }
 
-  package { 
-    'build-essential':  
+  package {
+    'build-essential':
       ensure => 'installed';
     'redis-server':
       ensure => 'installed';
@@ -39,18 +40,18 @@ class hubot {
   }
 
   service { 'redis-server':
-    ensure  => 'running', 
+    ensure  => 'running',
     require => Package['redis-server'],
   }
 
   vcsrepo { '/usr/local/hubot':
     provider => 'git',
-    source   => 'https://github.com/matthutchinson/henshall.git',
+    source   => $options['hubot-repo'],
     revision => 'master',
     owner    => 'hubot',
     group    => 'hubot',
     require  => [ User['hubot'], Package['git'] ],
-  } 
+  }
 
   exec { 'hubot dependencies':
     command => '/usr/bin/npm install -g',
@@ -60,7 +61,7 @@ class hubot {
   }
 
   user { 'hubot':
-    ensure => 'present',    
+    ensure => 'present',
     shell  => '/bin/false',
   }
 
