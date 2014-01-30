@@ -3,6 +3,19 @@
 # the best way to read this file is from the bottom up, following the babushka
 # dependency tree all the way to the top
 
+def hubot_options
+  {
+    :adapter          => 'irc',
+    :name             => 'henshall',
+    :repo             => 'https://github.com/matthutchinson/henshall.git',
+    :campfire_account => '',
+    :campfire_rooms   => '',
+    :campfire_token   => '',
+    :irc_server       => 'irc.perl.org',
+    :irc_rooms        => '#henshall'
+  }
+end
+
 # adds the add-apt-repository command
 dep 'add-apt-repository.bin' do
   requires 'apt'
@@ -48,7 +61,7 @@ dep 'hubot repo' do
     shell 'test -d /usr/local/hubot'
   }
   meet {
-    shell 'git clone https://github.com/matthutchinson/henshall.git /usr/local/hubot'
+    shell "git clone #{hubot_options[:repo]} /usr/local/hubot"
   }
 end
 
@@ -86,18 +99,6 @@ end
 
 # adds hubot upstart template with the hubot_options
 dep 'hubot upstart' do
-  def hubot_options
-   {
-     'hubot_adapter'    => 'irc',
-     'hubot_name'       => 'henshall',
-     'campfire_account' => '',
-     'campfire_rooms'   => '',
-     'campfire_token'   => '',
-     'irc_server'       => 'irc.perl.org',
-     'irc_rooms'        => '#henshall'
-   }
-  end
-
   met? {
     '/etc/init/hubot.conf'.p.exists?
   }

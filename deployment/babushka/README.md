@@ -6,9 +6,11 @@ On the hubot server itself, install the latest (stable) Babushka with:
     # OR auto-install with no questions asked via
     sh -c "`curl https://babushka.me/up`" </dev/null
 
-Copy the hubot deps to ~/.babushka/deps on the remote hubot server:
+Copy the hubot deps to `~/.babushka/deps` on the remote hubot server:
 
     scp -r ./deployment/babushka/deps hubot-hostname:~/.babushka/deps
+
+To configure the bot, edit the hubot_options hash in `~/.babushka/deps/hubot.rb`
 
 SSH to the hubot server and install the hubot dep with:
 
