@@ -1,1 +1,1 @@
-web: bin/hubot -a irc -n henshall
+web: bin/hubot -a $HUBOT_ADAPTER -n $HUBOT_NAME
