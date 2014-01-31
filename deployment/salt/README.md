@@ -15,6 +15,7 @@ On the child node, edit `/etc/salt/minion` adding:
 Trigger cert requests from the child with:
 
     salt-minion -l debug
+    # you can leave this running to debug any issues and see log output
 
 On the master node, accept these requests with:
 

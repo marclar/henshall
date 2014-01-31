@@ -32,7 +32,7 @@ coffee-script:
 
 hubot-git-repo:
   git.latest:
-    - name: {% pillar['hubot_repo'] %}
+    - name: {{ pillar.get('hubot_repo') }}
     - target: /usr/local/hubot
 
 hubot-dependencies:
