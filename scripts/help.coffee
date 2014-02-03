@@ -61,8 +61,7 @@ module.exports = (robot) ->
       if cmds.length == 0
         msg.send "No available commands match #{filter}"
         return
-
-    if robot.adapter.constructor.name == 'IrcBot'
+    else if robot.adapter.constructor.name == 'IrcBot'
       msg.send "Happy to help ❤  http://#{process.env.HUBOT_URL}/#{robot.name.toLowerCase()}/help"
       return
 
