@@ -62,6 +62,10 @@ module.exports = (robot) ->
         msg.send "No available commands match #{filter}"
         return
 
+    if robot.adapter.constructor.name == 'IrcBot'
+      msg.send "Happy to help ❤  http://#{robot.server.domain}/#{robot.name.toLowerCase()}/help"
+      return
+
     prefix = robot.alias or "#{robot.name} "
     cmds = cmds.map (cmd) ->
       cmd = cmd.replace /^hubot /, prefix
