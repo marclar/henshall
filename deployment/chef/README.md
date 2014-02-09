@@ -5,7 +5,7 @@
 * The master server requires 1GB of RAM, any lower and the install will fail :(
 * Chef master, workstation and children must all be able to access each other
   from real resolvable host names.
-* For the purposes of this guide, the workstation was my local OSX laptop.
+* For the purposes of this guide, the workstation was my local mac laptop.
 
 #### Getting Started
 
@@ -41,6 +41,9 @@ From the workstation, install Chef on the hubot child node with this simple one
 liner (the hubot child node is a blank slate at this stage):
 
     knife bootstrap hubot-hostname -x root
+
+Note, that chef uses `hostname --fqdn` on the child node to determine its host
+name, so you must have a proper hostname setup on the node for this to work.
 
 On your workstation copy the hubot cookbook from `./deployment/chef/hubot` to
 `~/chef-hubot/.chef/cookbooks/hubot`

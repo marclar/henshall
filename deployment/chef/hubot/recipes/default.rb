@@ -3,25 +3,37 @@
 # Recipe:: default
 #
 
-execute "add node repo" do
-  command "add-apt-repository -y ppa:chris-lea/node.js"
-  not_if do
-    not_if "apt-cache policy | grep chris-lea\/node\.js"
-  end
-end
-
 execute "apt-get-update" do
   command "apt-get update"
   only_if do
-    File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
-    File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
+    !File.exists?('/var/lib/apt/periodic/update-success-stamp') ||
+    (File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
+     File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400)
   end
 end
 
-%w(build-essential git-core redis-server python-software-properties software-properties-common nodejs).each do |package_name|
+%w(build-essential git-core redis-server python-software-properties
+  software-properties-common).each do |package_name|
   apt_package package_name do
     action :install
   end
+end
+
+execute "add node repo" do
+  command "add-apt-repository -y ppa:chris-lea/node.js"
+  not_if do
+    "apt-cache policy | grep chris-lea"
+  end
+  notifies :run, resources(:execute => "apt-get-update"), :immediately
+end
+
+package "update-notifier-common" do
+  ignore_failure true
+  notifies :run, resources(:execute => "apt-get-update"), :immediately
+end
+
+apt_package "nodejs" do
+  action :install
 end
 
 execute "install coffee script" do
@@ -30,7 +42,7 @@ execute "install coffee script" do
 end
 
 execute "clone hubot repo" do
-  command "git clone #{@hubot[:repo]} /usr/local/hubot"
+  command "git clone #{node[:hubot][:repo]} /usr/local/hubot"
   creates "/usr/local/hubot"
 end
 
