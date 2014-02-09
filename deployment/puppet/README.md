@@ -22,7 +22,7 @@ section add:
     certname = hubot-hostname
     certificate_revocation = false
 
-**Note** you _must_ use a host name here (not an IP address)
+**Note** you _must_ use host names here (not an IP addresses) for the server
 
 Start puppet on the hubot child server with:
 
@@ -41,7 +41,8 @@ Configure `/etc/puppet/puppet.conf` under the [main] section add:
     pluginsync = true
     certname = puppet-master-hostname
 
-**Note** you _must_ use a host name here (not an IP address)
+**Note** you _must_ use a host name here (not an IP address) and certname must
+match the server name.
 
 Start puppet on the master server with:
 
@@ -58,24 +59,26 @@ On master, view and accept this cert request with:
     puppet cert list
     puppet cert sign --all
 
-**Note** use `puppet cert clean --all` to revoke all certs on the master server
+**Note** use `puppet cert clean --all` to revoke all certs on the master server,
+on the client, use `rm -rf /var/lib/puppet/ssl; rm -rf /etc/puppet/ssl` then
+retry the cert signing.
 
 #### Configuring
 
-On the puppet master, install these additional puppet modules necessary this ]
+On the puppet master, install these additional puppet modules necessary for this
 hubot deployment to work:
 
-    puppet module install puppetlabs/nodejs
+    puppet module install willdurand/nodejs
     puppet module install puppetlabs/vcsrepo
+
+Edit `./deployment/puppet/hubot/manifests/init.pp` and set the configuration you
+would like for your bot.
 
 Copy `./deployment/puppet/hubot` to `/etc/puppet/modules/hubot` on the master
 server.
 
     scp -r ./deployment/puppet/hubot
     puppet-master-hostname:/etc/puppet/modules/hubot
-
-Edit `/hubot/manifests/init.pp` and set the configuration you would like for
-your bot.
 
 On puppet child, kick off the agent (either daemonized or once off) e.g.;
 

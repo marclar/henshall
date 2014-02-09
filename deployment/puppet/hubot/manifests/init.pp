@@ -46,7 +46,7 @@ class hubot {
 
   vcsrepo { '/usr/local/hubot':
     provider => 'git',
-    source   => $options['hubot-repo'],
+    source   => $options['hubot_repo'],
     revision => 'master',
     owner    => 'hubot',
     group    => 'hubot',
